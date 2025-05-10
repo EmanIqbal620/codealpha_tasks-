@@ -1,0 +1,266 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Image Gallery</title>
+  <style>
+    :root {
+      --bg-color: #f0f0f0;
+      --text-color: #333;
+      --card-bg: white;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      --card-bg: #1e1e1e;
+      --shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      text-align: center;
+      padding: 1rem;
+    }
+    .controls {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .controls button {
+      margin: 0.2rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #444;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .controls button.active {
+      background: #0d6efd;
+    }
+    .toggle-dark {
+      float: right;
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .image-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .image-card:hover {
+      transform: scale(1.05);
+    }
+    .image-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-bottom: 2px solid #ccc;
+      cursor: pointer;
+      transition: transform 0.3s;
+      aspect-ratio: 4/3;
+    }
+    .caption {
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    .likes {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background: #ffffffaa;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .lightbox-actions {
+      position: absolute;
+      bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .lightbox-actions button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Filter tags */
+    .image-card[data-category] {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📷 Creative Image Gallery</h1>
+    <button class="toggle-dark">🌗 Toggle Dark Mode</button>
+  </header>
+
+  <div class="controls">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="nature">Nature</button>
+    <button class="filter-btn" data-filter="people">People</button>
+    <button class="filter-btn" data-filter="travel">Travel</button>
+  </div>
+
+  <div class="gallery">
+    <div class="image-card" data-category="nature">
+      <img src="images/pic1.jpg" alt="Nature" loading="lazy" />
+      <div class="caption">Beautiful Forest</div>
+      <div class="likes">❤️ 24</div>
+    </div>
+    <div class="image-card" data-category="people">
+      <img src="images/pic2.jpg" alt="Person" loading="lazy" />
+      <div class="caption">Portrait</div>
+      <div class="likes">❤️ 30</div>
+    </div>
+    <div class="image-card" data-category="travel">
+      <img src="images/pic3.jpg" alt="Travel" loading="lazy" />
+      <div class="caption">Mountain View</div>
+      <div class="likes">❤️ 42</div>
+    </div>
+    Add more images with the same pattern -->
+  <!-- </div>
+
+   <div class="lightbox" id="lightbox">
+    <span class="lightbox-nav" id="prev">&#10094;</span>
+    <img id="lightbox-img" src="" alt="Preview" />
+    <span class="lightbox-nav" id="next">&#10095;</span>
+    <div class="lightbox-actions">
+      <button onclick="downloadImage()">⬇️ Download</button>
+      <button onclick="shareImage()">🔗 Share</button>
+    </div>
+  </div>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".image-card");
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelector(".filter-btn.active").classList.remove("active");
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const category = card.dataset.category;
+          card.style.display = filter === "all" || category === filter ? "block" : "none";
+        });
+      });
+    });
+
+    // Dark mode toggle
+    document.querySelector(".toggle-dark").addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    let currentIndex = 0;
+    const images = Array.from(document.querySelectorAll(".gallery img"));
+
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        currentIndex = index;
+        openLightbox(img.src);
+      });
+    });
+
+    function openLightbox(src) {
+      lightbox.classList.add("active");
+      lightboxImg.src = src;
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("active");
+    }
+
+    document.getElementById("prev").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    });
+
+    document.getElementById("next").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+    });
+
+    function downloadImage() {
+      const a = document.createElement('a');
+      a.href = lightboxImg.src;
+      a.download = "image.jpg";
+      a.click();
+    }
+
+    function shareImage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "Check out this image",
+          url: lightboxImg.src
+        });
+      } else {
+        alert("Sharing not supported on this device.");
+      }
+    }
+  </script>
+</body>
+</html>  --> -->
